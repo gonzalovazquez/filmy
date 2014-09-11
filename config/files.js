@@ -2,10 +2,19 @@ exports.lib = [
 	'bower_components/**'
 ];
 
-exports.test = [
-	'bower_components/angular/angular.js',
+exports.libTest = [
+	'bower_components/angularjs/angular.js',
+	'bower_components/jquery/dist/jquery.js',
+];
+
+var testfiles = [
 	'bower_components/angular-mocks/angular-mocks.js',
-	'test/unit/**/*.spec.js', 'src/scripts/*.js'
+	'test/unit/**/*.spec.js'
+];
+
+exports.main = [
+	'src/scripts/filmy.js',
+	'src/scripts/**/*.js'
 ];
 
 exports.styles = [
@@ -19,5 +28,7 @@ exports.views = [
 ];
 
 exports.templates = [
-	'src/templates/**'
+	'src/templates/*.html'
 ];
+
+exports.test = exports.libTest.concat(exports.libTest, testfiles, exports.main);

@@ -93,7 +93,7 @@ gulp.task("lint", function() {
 
 //Test
 gulp.task('test', function() {
-	return gulp.src(files.test)
+	return gulp.src(files.test.concat(files.templates))
 		.pipe(karma({
 			configFile: 'config/karma.conf.js',
 			action: 'run'
@@ -104,7 +104,7 @@ gulp.task('test', function() {
 });
 
 gulp.task('test-watch', function() {
-	return gulp.src(paths.test.src)
+	return gulp.src(files.test.concat(files.templates))
 		.pipe(karma({
 			configFile: 'karma.conf.js',
 			action: 'watch'
