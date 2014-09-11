@@ -40,9 +40,6 @@ var paths = {
 		images: {
 			src: 'src/images/*.png',
 			dest: 'public/images'
-		},
-		test: {
-			src : ['bower_components/angular/angular.js', 'bower_components/angular-mocks/angular-mocks.js','test/unit/**/*.spec.js', 'src/scripts/*.js']
 		}
 };
 
@@ -96,7 +93,7 @@ gulp.task("lint", function() {
 
 //Test
 gulp.task('test', function() {
-	return gulp.src(paths.test.src)
+	return gulp.src(files.test)
 		.pipe(karma({
 			configFile: 'config/karma.conf.js',
 			action: 'run'
