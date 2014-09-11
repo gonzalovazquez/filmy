@@ -126,7 +126,8 @@ gulp.task('watch', ['build','server','launch'], function() {
 	gulp.watch([paths.public.index], ['build-html']);
 	gulp.watch([paths.scripts.src], ['minify-js']);
 	gulp.watch([files.styles], ['sass']);
-	gulp.watch([paths.public.views], ['views']);
+	gulp.watch([files.views], ['views']);
+	gulp.watch([files.templates], ['templates']);
 });
 
 gulp.task('server', function(next) {
@@ -147,8 +148,14 @@ gulp.task('bower_components', function(){
 
 //Move views to public folder
 gulp.task('views', function(){
-	return gulp.src('src/views/**')
+	return gulp.src(files.views)
 		.pipe(gulp.dest('public/views'));
+});
+
+//Move templates to public folder
+gulp.task('templates', function(){
+	return gulp.src(files.templates)
+		.pipe(gulp.dest('public/templates'));
 });
 
 //Build
@@ -159,6 +166,7 @@ gulp.task('build', function(callback) {
 		'build-html',
 		'bower_components',
 		'views',
+		'templates',
 		callback);
 });
 
