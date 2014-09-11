@@ -1,0 +1,10 @@
+{
+  "name": "filmy",
+  "private": true,
+  "dependencies": {
+    "angularjs": "~1.2.22",
+    "bootstrap": "~3.2.0",
+    "angular-mocks": "~1.2.24"
+  },
+  "devDependencies": {}
+}
