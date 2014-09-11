@@ -25,7 +25,8 @@ var paths = {
 		public: {
 			src: 'src',
 			index: 'src/index.html',
-			dest: 'public'
+			dest: 'public',
+			views: 'src/views/**'
 		},
 		scripts: {
 			src:  'src/scripts/**/*.js',
@@ -128,6 +129,7 @@ gulp.task('watch', ['build','server','launch'], function() {
 	gulp.watch([paths.public.index], ['build-html']);
 	gulp.watch([paths.scripts.src], ['minify-js']);
 	gulp.watch([paths.styles.src], ['sass']);
+	gulp.watch([paths.public.views], ['views']);
 });
 
 gulp.task('server', function(next) {
@@ -141,11 +143,17 @@ gulp.task('launch', function(){
 });
 
 //Move bower_components to public
-gulp.task('move', function(){
+gulp.task('bower_components', function(){
 	// the base option sets the relative root for the set of files,
 	// preserving the folder structure
 	gulp.src(files.lib, { base: './' })
-	.pipe(gulp.dest(paths.public.dest));
+		.pipe(gulp.dest(paths.public.dest));
+});
+
+//Move views to public folder
+gulp.task('views', function(){
+	return gulp.src('src/views/**')
+		.pipe(gulp.dest('public/views'));
 });
 
 //Build
@@ -154,7 +162,8 @@ gulp.task('build', function(callback) {
 		'clean',
 		['minify-js','sass'],
 		'build-html',
-		'move',
+		'bower_components',
+		'views',
 		callback);
 });
 

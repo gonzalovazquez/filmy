@@ -64,11 +64,11 @@ filmy.controller('filmyController', ['filmyService', '$scope', function (filmySe
 
 	/***HELPER FUNCTIONS***/
 
-	function convertToArray (value) { return Array.new = value.split(',') };
+	function convertToArray (value) { return Array.new = value.split(','); };
 
 	function convertToInt (value) {
 		if (value == 'N/A') {
-			return 0
+			return 0;
 		} else {
 			var replaceComma = value.replace(',','');
 			return parseInt(replaceComma);
