@@ -64,7 +64,7 @@ filmy.controller('filmyController', ['filmyService', '$scope', function (filmySe
 
 	/***HELPER FUNCTIONS***/
 
-	function convertToArray (value) { return Array.new = value.split(','); };
+	function convertToArray (value) { return Array.new = value.split(','); }
 
 	function convertToInt (value) {
 		if (value == 'N/A') {

@@ -34,7 +34,6 @@ var paths = {
 			dest: 'public/javascript'
 		},
 		styles: {
-			src:  ['src/styles/*.scss','src/styles/*.css', 'src/styles/*.sass' ],
 			dest: 'public/css'
 		},
 		images: {
@@ -54,7 +53,7 @@ gulp.task('minify-js', function(){
 
 // SASS to CSS
 gulp.task('sass', function () {
-	return gulp.src(paths.styles.src)
+	return gulp.src(files.styles)
 	.pipe(sass({
 			onError: function (error) {
 			gutil.log(gutil.colors.red(error));
@@ -125,7 +124,7 @@ gulp.task('watch', ['build','server','launch'], function() {
 	});
 	gulp.watch([paths.public.index], ['build-html']);
 	gulp.watch([paths.scripts.src], ['minify-js']);
-	gulp.watch([paths.styles.src], ['sass']);
+	gulp.watch([files.styles], ['sass']);
 	gulp.watch([paths.public.views], ['views']);
 });
 
@@ -141,8 +140,6 @@ gulp.task('launch', function(){
 
 //Move bower_components to public
 gulp.task('bower_components', function(){
-	// the base option sets the relative root for the set of files,
-	// preserving the folder structure
 	gulp.src(files.lib, { base: './' })
 		.pipe(gulp.dest(paths.public.dest));
 });
