@@ -5,10 +5,10 @@ exports.lib = [
 exports.libTest = [
 	'bower_components/angularjs/angular.js',
 	'bower_components/jquery/dist/jquery.js',
+	'bower_components/angular-mocks/angular-mocks.js'
 ];
 
 var testfiles = [
-	'bower_components/angular-mocks/angular-mocks.js',
 	'test/unit/**/*.spec.js'
 ];
 
@@ -31,4 +31,4 @@ exports.templates = [
 	'src/templates/*.html'
 ];
 
-exports.test = exports.libTest.concat(exports.libTest, testfiles, exports.main);
+exports.test = exports.libTest.concat(exports.libTest, exports.main, testfiles);
