@@ -106,7 +106,7 @@ gulp.task('test', function() {
 gulp.task('test-watch', function() {
 	return gulp.src(files.test.concat(files.templates))
 		.pipe(karma({
-			configFile: 'karma.conf.js',
+			configFile: 'config/karma.conf.js',
 			action: 'watch'
 		}))
 		.on('error', function(err) {
