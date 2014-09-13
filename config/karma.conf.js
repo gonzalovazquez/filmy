@@ -9,6 +9,9 @@ module.exports = function(config) {
 		//Alernatively you can use 'Chrome'
 		browsers: ['PhantomJS'],
 		captureTimeout: 6000,
-		singleRun: true
+		singleRun: true,
+		ngHtml2JsPreprocessor : {
+			stripPrefix: 'src/'
+		}
  	});
 };
