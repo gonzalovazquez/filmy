@@ -11,6 +11,6 @@ describe('searchFilmDirective', function() {
 	}));
 
 	it('should render the wmSearchFilm directive', function() {
-		expect(elem.find('div.result').length).toBe(1);
+		expect(elem.find('p').text()).toContain('Search');
 	});
 });
