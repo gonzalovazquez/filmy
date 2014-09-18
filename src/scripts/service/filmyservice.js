@@ -12,7 +12,7 @@ filmy.service('filmyService', ['$http', function($http) {
 	function deleteExternal(method, id) {
 		return $http({
 			method: method,
-			url: 'http://localhost:15715/api/films/' + id,
+			url: 'api/films/' + id,
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 		});
 	}
@@ -20,7 +20,7 @@ filmy.service('filmyService', ['$http', function($http) {
 	function requestInternal(method, data) {
 		return $http({
 			method: method,
-			url: 'http://localhost:15715/api/films',
+			url: 'api/films',
 			headers: {'Content-Type': 'application/x-www-form-urlencoded', 'Access-Control-Allow-Origin' : '*', 'Access-Control-Allow-Headers' : 'Origin, X-Requested-With, Content-Type, Accept'},
 			data: data
 		});
