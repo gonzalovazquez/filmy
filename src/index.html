@@ -15,8 +15,63 @@
 	<!-- endinject -->
 </head>
 <body ng-app="filmy">
-	<h1>Filmy</h1>
-	<div search-film></div>
+	<div class="pageContainer">
+		<div class="mainAppTitleBar">
+			<div class="appTitle"></div>
+			<div class="btn btn-vue logoutButton" ng-click="login()">
+				LOGIN
+			</div>
+		</div>
+		<div class="mainContainer">
+			<div class="sidebar" data-sidebar="">
+				<div class="sideBarList">
+					<a href="#">
+						<div class="sidebarItem">
+							<div class="sidebarItemText">
+								<i class="fa fa-circle-o-notch"></i>
+							</div>
+						</div>
+					</a>
+					<a href="#">
+						<div class="sidebarItem">
+							<div class="sidebarItemText">
+								<i class="fa fa-circle-o-notch"></i>
+							</div>
+						</div>
+					</a>
+					<a href="#"> 
+						<div class="sidebarItem">
+							<div class="sidebarItemText">
+								<i class="fa fa-database"></i>
+							</div>
+						</div>
+					</a>
+					<a href="#">
+						<div class="sidebarItem">
+							<div class="sidebarItemText">
+								<i class="fa fa-cog"></i>
+							</div>
+						</div>
+					</a>
+				</div>
+			</div>
+			<div id="mainApp" class="mainApp">
+				<div query-input></div>
+				<div ng-if="film">
+					<h1><strong>Title</strong>: {{ film.Title }}</h1>
+					<p><strong>Rated</strong>: {{ film.Rated}} </p>
+					<p><strong>Year:</strong> {{ film.Year }}</p>
+					<p><strong>Released:</strong> {{ film.Released }}</p>
+					<p><strong>Runtime:</strong> {{ film.Runtime }}</p>
+					<p><strong>Genre:</strong> {{ film.Genre }}</p>
+					<p><strong>Actors:</strong> {{ film.Actors }}</p>
+					<p><strong>Plot:</strong> {{ film.Plot }}</p>
+					<div save-film></div>
+				</div>
+				<div film-library></div>
+			</div>
+		</div>
+	</div>
 	<script src="bower_components/jquery/dist/jquery.js"></script>
 	<script src="bower_components/angularjs/angular.js"></script>
 	<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>

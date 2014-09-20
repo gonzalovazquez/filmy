@@ -1,0 +1,50 @@
+.sidebar {
+	float: left;
+	width: 50px;
+	background: #333;
+	background-color: #222326;
+	color:white;
+    font-family:'Gotham SSm A', 'Gotham SSm B', sans-serif;
+	font-size: 11px;
+	height: 100%;
+	position: fixed;
+	/*box-shadow: inset -4px 0px 8px rgb(2, 8, 16);*/
+}
+
+.sideBarList {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	margin-top: 20px;
+}
+
+.sidebarItem {
+	cursor: pointer;
+	display: table;
+    font-family:'Gotham SSm A', 'Gotham SSm B', sans-serif;
+	letter-spacing: 1px;
+	word-spacing: 2px;
+	text-transform: uppercase;
+	font-weight: 100;
+	color: #727373;
+	border-bottom: none;
+	font-size: 11px;
+	height: 60px;
+	margin: 0px;
+	width: 50px;
+}
+
+.sidebarItem.active {
+	color: #68DBC0;
+}
+
+.sidebarItem:hover {
+	color: #68DBC0;
+}
+
+.sidebarItemText {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 18px;
+}

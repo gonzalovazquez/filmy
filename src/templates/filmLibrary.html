@@ -1,0 +1,6 @@
+<a href="#" ng-click="showCollection()"><button>Show Collection</button></a>
+<div>
+	<ul ng-repeat="film in films">
+		<li>{{ film.title }} <a href="#"><span ng-click="deleteFilm(film._id)">(-)</span></a></li>
+	</ul>
+</div>

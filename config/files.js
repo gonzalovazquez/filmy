@@ -31,4 +31,8 @@ exports.templates = [
 	'src/templates/*.html'
 ];
 
+exports.fonts = [
+	'src/fonts/*'
+];
+
 exports.test = exports.libTest.concat(exports.libTest, exports.main, testfiles);

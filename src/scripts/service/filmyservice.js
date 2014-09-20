@@ -4,8 +4,7 @@ filmy.service('filmyService', ['$http', function($http) {
 		return $http({
 			method: method,
 			url: 'http://www.omdbapi.com/' + endpoint,
-			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-			data: data
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 		});
 	}
 
