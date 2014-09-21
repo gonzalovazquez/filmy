@@ -8,6 +8,10 @@ var filmy = angular.module('filmy', ['ui.router'])
 			.state('library', {
 				url: '/library',
 				templateUrl: 'views/library.html'
+			})
+			.state('discover', {
+				url: '/discover',
+				templateUrl: 'views/discover.html'
 			});
 		$urlRouterProvider.otherwise('/');
 });
