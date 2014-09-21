@@ -1,0 +1,66 @@
+input {
+	color: #000;
+}
+
+.main-search {
+	width: 541px;
+}
+
+.btn-filmy {
+	width: 100%;
+	background-color: #68DBC0;
+	border-color: #68DBC0;
+	color: #464343;
+	font-size: 16px;
+	text-transform: uppercase;
+	font-weight: 600;
+}
+
+.btn-filmy:hover {
+	width: 100%;
+	background-color: #727373;
+	border-color: #727373;
+}
+
+.btn-vue {
+	float: right;
+	margin-top: 10px;
+	display: inline-block;
+	margin-bottom: 0;
+	font-weight: 400;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	background-image: none;
+	border: 1px solid transparent;
+	white-space: nowrap;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	border-radius: 3px;
+	color: white;
+	background-color: #68DBC0; /*#47AF90;*/
+	padding: 6px 12px;
+	font-size: 12px;
+	line-height: 1.42857143;
+	letter-spacing: 2px;
+	height: 30px;
+}
+
+.btn-vue-inverse {
+	color: rgb(94, 94, 94);
+	background-color: rgba(71, 175, 144, 0);
+	border: 1px solid rgb(94, 94, 94);
+}
+
+.btn-vue:hover {
+	color: white;
+	background-color: #41A083;
+}
+
+.btn-vue-inverse:hover {
+	color: rgb(94, 94, 94);
+	background-color: rgba(167, 167, 167, 0.08);
+	border: 1px solid rgb(94, 94, 94);
+}

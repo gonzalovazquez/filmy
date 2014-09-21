@@ -15,8 +15,44 @@
 	<!-- endinject -->
 </head>
 <body ng-app="filmy">
-	<h1>Filmy</h1>
-	<div search-film></div>
+	<div class="pageContainer">
+		<div class="mainAppTitleBar">
+			<div class="appTitle"></div>
+			<div class="btn btn-vue logoutButton" ng-click="login()">
+				LOGIN
+			</div>
+		</div>
+		<div class="mainContainer" ng-controller="sideBarCtrl">
+			<div class="sidebar" data-sidebar="">
+				<div class="sideBarList">
+					<a href="#/">
+						<div class="sidebarItem" ng-class="{ active:isActive('/') }">
+							<div class="sidebarItemText">
+								<i class="fa fa-binoculars"></i>
+							</div>
+						</div>
+					</a>
+					<a href="#/library">
+						<div class="sidebarItem" ng-class="{ active:isActive('/library') }">
+							<div class="sidebarItemText">
+								<i class="fa fa-archive"></i>
+							</div>
+						</div>
+					</a>
+					<a href="#/discover">
+						<div class="sidebarItem" ng-class="{ active:isActive('/discover') }">
+							<div class="sidebarItemText">
+								<i class="fa fa-circle"></i>
+							</div>
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="container mainApp">
+				<div ui-view></div>
+			</div>
+		</div>
+	</div>
 	<script src="bower_components/jquery/dist/jquery.js"></script>
 	<script src="bower_components/angularjs/angular.js"></script>
 	<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>

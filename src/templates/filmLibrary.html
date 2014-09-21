@@ -1,0 +1,20 @@
+<div class="row">	
+	<div class="col-md-12">
+		<a href="javascript:void(0)" ng-click="showCollection()">
+			<button type="button" class="btn btn-info btn-filmy">Show Collection</button>
+		</a>
+	</div>
+</div>
+<div class="row pd-t20" ng-repeat="film in films">
+	<div class="col-md-4">
+		<h3>{{ film.title }}</h3>
+	</div>
+	<div class="col-md-6">
+		<p>{{ film.plot }}</p>
+	</div>
+	<div class="col-md-2">
+		<a href="javascript:void(0)" ng-click="deleteFilm(film._id)">
+			<button type="button" class="btn btn-danger">Delete</button>
+		</a>
+	</div>
+</div>

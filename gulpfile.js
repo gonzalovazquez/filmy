@@ -158,6 +158,12 @@ gulp.task('templates', function(){
 		.pipe(gulp.dest('public/templates'));
 });
 
+//Move fonts to public folder
+gulp.task('fonts', function(){
+	return gulp.src(files.fonts)
+		.pipe(gulp.dest('public/fonts'));
+});
+
 //Build
 gulp.task('build', function(callback) {
 	sequence(
@@ -167,6 +173,7 @@ gulp.task('build', function(callback) {
 		'bower_components',
 		'views',
 		'templates',
+		'fonts',
 		callback);
 });
 

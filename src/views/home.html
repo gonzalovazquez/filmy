@@ -1,0 +1,45 @@
+<div query-input></div>
+<div class="row">
+	<div class="col-md-12">
+		<div ng-if="film">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Movie</th>
+					</tr>
+				</thead>
+				<tbody class="table-striped">
+				  	<tr>
+						<td>Title</td>
+						<td>{{ film.Title }}</td>
+					</tr>
+					<tr>
+						<td>Rated</td>
+						<td>{{ film.Rated }}</td>
+					</tr>
+					<tr>
+						<td>Year</td>
+						<td>{{ film.Year }}</td>
+					</tr>
+					<tr>
+						<td>Released</td>
+						<td>{{ film.Released }}</td>
+					</tr>
+					<tr>
+						<td>Genre</td>
+						<td>{{ film.Genre }}</td>
+					</tr>
+					<tr>
+						<td>Actors</td>
+						<td>{{ film.Actors }}</td>
+					</tr>
+					<tr>
+						<td>Plot</td>
+						<td>{{ film.Plot }}</td>
+					</tr>
+				</tbody>
+			</table>
+			<div save-film></div>
+		</div>
+	</div>
+</div>
