@@ -1,2 +1,12 @@
-<input type="text" class="main-query" ng-model="title">
-<a href="#" ng-click="searchMovie();"><button >Search</button></a>
+<form class="navbar-form text-center" role="search">
+	<div class="col-md-12">
+		<div class="form-group">
+			<input type="text" class="form-control main-search" placeholder="Search Film" ng-model="title">
+		</div>
+		<a href="javascript:void(0)" ng-click="searchMovie();">
+			<button type="submit" class="btn btn-default">
+				<span class="glyphicon glyphicon-search"></span>
+			</button>
+		</a>
+	</div>
+</form>

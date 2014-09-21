@@ -13,7 +13,6 @@ filmy.directive('filmLibrary', ['filmyService', function(filmyService) {
 			};
 
 			scope.deleteFilm = function(id) {
-				console.log(id, 'id');
 				filmyService.deleteMovie(id).then(function(res){
 					scope.films = res.data;
 				});

@@ -41,8 +41,7 @@ body, html {
 }
 
 .mainApp {
-	margin-left: 100px;
-	margin-top: 50px;
+	margin: 50px 0 0 50px;
 	height: 100%;
 	font-family: "Lato", sans-serif;
 	font-weight: 300;

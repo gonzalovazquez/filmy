@@ -22,53 +22,27 @@
 				LOGIN
 			</div>
 		</div>
-		<div class="mainContainer">
+		<div class="mainContainer" ng-controller="sideBarCtrl">
 			<div class="sidebar" data-sidebar="">
 				<div class="sideBarList">
-					<a href="#">
-						<div class="sidebarItem">
+					<a href="#/">
+						<div class="sidebarItem" ng-class="{ active:isActive('/') }">
 							<div class="sidebarItemText">
-								<i class="fa fa-circle-o-notch"></i>
+								<i class="fa fa-binoculars"></i>
 							</div>
 						</div>
 					</a>
-					<a href="#">
-						<div class="sidebarItem">
+					<a href="#/library">
+						<div class="sidebarItem" ng-class="{ active:isActive('/library') }">
 							<div class="sidebarItemText">
-								<i class="fa fa-circle-o-notch"></i>
-							</div>
-						</div>
-					</a>
-					<a href="#"> 
-						<div class="sidebarItem">
-							<div class="sidebarItemText">
-								<i class="fa fa-database"></i>
-							</div>
-						</div>
-					</a>
-					<a href="#">
-						<div class="sidebarItem">
-							<div class="sidebarItemText">
-								<i class="fa fa-cog"></i>
+								<i class="fa fa-archive"></i>
 							</div>
 						</div>
 					</a>
 				</div>
 			</div>
-			<div id="mainApp" class="mainApp">
-				<div query-input></div>
-				<div ng-if="film">
-					<h1><strong>Title</strong>: {{ film.Title }}</h1>
-					<p><strong>Rated</strong>: {{ film.Rated}} </p>
-					<p><strong>Year:</strong> {{ film.Year }}</p>
-					<p><strong>Released:</strong> {{ film.Released }}</p>
-					<p><strong>Runtime:</strong> {{ film.Runtime }}</p>
-					<p><strong>Genre:</strong> {{ film.Genre }}</p>
-					<p><strong>Actors:</strong> {{ film.Actors }}</p>
-					<p><strong>Plot:</strong> {{ film.Plot }}</p>
-					<div save-film></div>
-				</div>
-				<div film-library></div>
+			<div class="container mainApp">
+				<div ui-view></div>
 			</div>
 		</div>
 	</div>
