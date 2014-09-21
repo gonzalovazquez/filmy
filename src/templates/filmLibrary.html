@@ -1,6 +1,17 @@
-<a href="javascript:void(0)" ng-click="showCollection()"><button>Show Collection</button></a>
-<div>
-	<ul ng-repeat="film in films">
-		<li>{{ film.title }} <a href="#"><span ng-click="deleteFilm(film._id)">(-)</span></a></li>
-	</ul>
+<div class="col-md-12">
+	<a href="javascript:void(0)" ng-click="showCollection()">
+		<button type="button" class="btn btn-info btn-filmy">Show Collection</button>
+	</a>
+</div>
+
+<div class="row" ng-repeat="film in films">
+	<div class="col-md-4">
+		<h3>{{ film.title }}</h3>
+	</div>
+	<div class="col-md-6">
+		<p>{{ film.plot }}</p>
+	</div>
+	<div class="col-md-2">
+		<button type="button" class="btn btn-link" ng-click="deleteFilm(film._id)">Delete</button>
+	</div>
 </div>

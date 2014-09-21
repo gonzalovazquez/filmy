@@ -2,14 +2,43 @@
 <div class="row">
 	<div class="col-md-12">
 		<div ng-if="film">
-			<h1><strong>Title</strong>: {{ film.Title }}</h1>
-			<p><strong>Rated</strong>: {{ film.Rated}} </p>
-			<p><strong>Year:</strong> {{ film.Year }}</p>
-			<p><strong>Released:</strong> {{ film.Released }}</p>
-			<p><strong>Runtime:</strong> {{ film.Runtime }}</p>
-			<p><strong>Genre:</strong> {{ film.Genre }}</p>
-			<p><strong>Actors:</strong> {{ film.Actors }}</p>
-			<p><strong>Plot:</strong> {{ film.Plot }}</p>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Movie</th>
+					</tr>
+				</thead>
+				<tbody class="table-striped">
+				  	<tr>
+						<td>Title</td>
+						<td>{{ film.Title }}</td>
+					</tr>
+					<tr>
+						<td>Rated</td>
+						<td>{{ film.Rated }}</td>
+					</tr>
+					<tr>
+						<td>Year</td>
+						<td>{{ film.Year }}</td>
+					</tr>
+					<tr>
+						<td>Released</td>
+						<td>{{ film.Released }}</td>
+					</tr>
+					<tr>
+						<td>Genre</td>
+						<td>{{ film.Genre }}</td>
+					</tr>
+					<tr>
+						<td>Actors</td>
+						<td>{{ film.Actors }}</td>
+					</tr>
+					<tr>
+						<td>Plot</td>
+						<td>{{ film.Plot }}</td>
+					</tr>
+				</tbody>
+			</table>
 			<div save-film></div>
 		</div>
 	</div>
