@@ -6,11 +6,9 @@ filmy.directive('filmLibrary', ['filmyService', function(filmyService) {
 			films : '@'
 		},
 		link: function(scope) {
-			scope.showCollection = function() {
-				filmyService.getMovie(true).then(function(res) {
+			filmyService.getMovie(true).then(function(res) {
 					scope.films = res.data;
-				})
-			};
+			})
 
 			scope.deleteFilm = function(id) {
 				filmyService.deleteMovie(id).then(function(res){
