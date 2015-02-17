@@ -172,8 +172,8 @@ gulp.task('build', 'Builds projects for distribution', function(callback) {
 	sequence(
 		'clean',
 		['minify-js','css'],
-		'build-html',
 		'bower_components',
+		'build-html',
 		'views',
 		'templates',
 		'fonts',
