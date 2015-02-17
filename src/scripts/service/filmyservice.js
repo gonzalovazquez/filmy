@@ -1,5 +1,7 @@
 filmy.service('filmyService', ['$http', function($http) {
 
+	var hostName = 'http://filmviz.ca/api/films';
+
 	function requestExternal(method, endpoint) {
 		return $http({
 			method: method,
@@ -11,7 +13,7 @@ filmy.service('filmyService', ['$http', function($http) {
 	function deleteExternal(method, id) {
 		return $http({
 			method: method,
-			url: 'api/films/' + id,
+			url: hostName + id,
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 		});
 	}
@@ -19,7 +21,7 @@ filmy.service('filmyService', ['$http', function($http) {
 	function requestInternal(method, data) {
 		return $http({
 			method: method,
-			url: 'api/films',
+			url: hostName,
 			headers: {'Content-Type': 'application/x-www-form-urlencoded', 'Access-Control-Allow-Origin' : '*', 'Access-Control-Allow-Headers' : 'Origin, X-Requested-With, Content-Type, Accept'},
 			data: data
 		});
