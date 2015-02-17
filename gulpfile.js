@@ -6,7 +6,6 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var livereload = require('gulp-livereload');
 var files = require('./config/files');
-var open = require('open');
 var minifyCSS = require('gulp-minify-css');
 var imagemin = require('gulp-imagemin');
 var colors = require('colors');
@@ -19,42 +18,26 @@ var stylish = require('jshint-stylish');
 var pkg = require('./package.json');
 var gulpif = require('gulp-if');
 var argv = require('yargs').argv;
-
-var serverAddress = 'localhost:', port = 8090;
-
-var paths = {
-		public: {
-			src: 'src',
-			index: 'src/index.html',
-			dest: 'public',
-			views: 'src/views/**'
-		},
-		scripts: {
-			src:  'src/scripts/**/*.js',
-			vendor: 'src/scripts/vendor/*js',
-			dest: 'public/javascript'
-		},
-		styles: {
-			dest: 'public/css'
-		},
-		images: {
-			src: 'src/images/*.png',
-			dest: 'public/images'
-		}
-};
+var es = require('event-stream');
+var webserver = require('gulp-webserver');
+var size = require('gulp-filesize');
+var protractor = require("gulp-protractor").protractor;
+var gulp = require('gulp-help')(require('gulp'));
+var stream;
 
 // Concat & Minify JS
-gulp.task('minify-js', function(){
-	return gulp.src([paths.scripts.vendor, paths.scripts.src])
+gulp.task('minify-js','Minifies all javascript', function(){
+	return gulp.src([files.vendor, files.scripts])
 		.pipe(concat('all-'+ pkg.version + '.min.js'))
-		.pipe(gulp.dest(paths.scripts.dest))
+		.pipe(gulp.dest(files.publicScripts))
 		.pipe(gulpif(argv.production, uglify()))
-		.pipe(gulp.dest(paths.scripts.dest));
+		.pipe(gulp.dest(files.publicScripts))
+		.pipe(size());
 });
 
 // SASS to CSS
-gulp.task('sass', function () {
-	return gulp.src(files.styles)
+gulp.task('css','Compliles sass to css', function () {
+	var sassFiles = gulp.src(files.sass)
 	.pipe(sass({
 			onError: function (error) {
 			gutil.log(gutil.colors.red(error));
@@ -63,36 +46,39 @@ gulp.task('sass', function () {
 		onSuccess: function () {
 			gutil.log(gutil.colors.green('Sass styles compiled successfully.'));
 		}
-	}))
-	.pipe(concat('main-' + pkg.version + '.min.css'))
-	.pipe(gulpif(argv.production, minifyCSS()))
-	.pipe(gulp.dest(paths.styles.dest))
+	}));
+
+	return es.concat(gulp.src(files.css), sassFiles)
+			.pipe(concat('main-' + pkg.version + '.min.css'))
+			.pipe(gulpif(argv.production, minifyCSS()))
+			.pipe(gulp.dest(files.publicStyles))
+			.pipe(size());
 });
 
 //Minify Images
-gulp.task('minify-img', function () {
-	gulp.src(paths.images.src)
+gulp.task('minify-img','Minifies images', function () {
+	gulp.src(files.images)
 		.pipe(imagemin())
-		.pipe(gulp.dest(paths.images.dest));
+		.pipe(gulp.dest(files.publicImage));
 });
 
 // Build HTML files
-gulp.task('build-html', function() {
-	gulp.src([paths.scripts.dest + '/*.js', paths.styles.dest + '/*.css'], {read: false})
-		.pipe(inject(paths.public.index, {ignorePath: paths.public.dest}))
-		.pipe(gulp.dest(paths.public.dest))
+gulp.task('build-html', 'Dynamically injects javascript and css files', function() {
+	gulp.src(files.index)
+		.pipe(inject(gulp.src(['./public/javascript/*.js','./public/css/*.css'], { read: false }), { ignorePath: 'public/' }))
+		.pipe(gulp.dest(files.publicDir))
+		.pipe(size());
 });
 
-
 // Lint JS
-gulp.task("lint", function() {
-	gulp.src([paths.scripts.src, '!'+ paths.scripts.vendor])
+gulp.task("lint", 'Lints javascript', function() {
+	gulp.src([files.scripts, '!'+ files.vendor])
 		.pipe(jshint())
 		.pipe(jshint.reporter(stylish));
 });
 
 //Test
-gulp.task('test', function() {
+gulp.task('test', 'Runs unit tests', function() {
 	return gulp.src(files.test.concat(files.templates))
 		.pipe(karma({
 			configFile: 'config/karma.conf.js',
@@ -103,7 +89,32 @@ gulp.task('test', function() {
 		});
 });
 
-gulp.task('test-watch', function() {
+//End to end tests
+gulp.task('e2e','Runs end to end tests', ['build'], function(cb) {
+	stream = gulp.src('public')
+		.pipe(webserver({
+			livereload: false,
+			directoryListing: false,
+			open: false
+	}));
+	gulp.src(['test/e2e/**.spec.js'])
+		.pipe(protractor(
+		{
+			configFile: 'config/protractor.conf.js',
+			args: ['--baseUrl', 'http://localhost:8000']
+		}
+	)).on('error', function(e) {
+		console.log(e);
+		stream.emit('kill');
+		process.exit();
+	})
+	.once('end', function () {
+		stream.emit('kill');
+		process.exit();
+	});      
+});
+
+gulp.task('test-watch','Unit tests with watch', function() {
 	return gulp.src(files.test.concat(files.templates))
 		.pipe(karma({
 			configFile: 'config/karma.conf.js',
@@ -114,74 +125,59 @@ gulp.task('test-watch', function() {
 		});
 });
 
-/*
- * Watch
- * Open Sublime before running this task
-*/
-gulp.task('watch', ['build','server','launch'], function() {
-	var server = livereload();
-	gulp.watch(paths.public.src + '/**', ['lint']).on('change', function(file) {
-			server.changed(file.path);
-	});
-	gulp.watch([paths.public.index], ['build-html']);
-	gulp.watch([paths.scripts.src], ['minify-js']);
-	gulp.watch([files.styles], ['sass']);
-	gulp.watch([files.views], ['views']);
-	gulp.watch([files.templates], ['templates']);
+gulp.task('watch', 'Watches and builds for changes', ['build'], function() {
+	gulp.watch(files.source + '/**', ['lint']);
+	gulp.watch([files.index], ['build-html']);
+	gulp.watch([files.scripts], ['minify-js']);
+	gulp.watch([files.sass], ['css']);
+	gulp.watch([files.css], ['css']);
 });
 
-gulp.task('server', function(next) {
-	var connect = require('connect'),
-		server = connect();
-	server.use(connect.static(paths.public.dest)).listen(port, next);
-});
-
-gulp.task('launch', function(){
-	open('http://' + serverAddress + port);
+//Launched web server and watches for changes
+gulp.task('webserver', 'Launches web server',['watch'], function(next) {
+	gulp.src('public')
+	.pipe(webserver({
+		livereload: false,
+		directoryListing: false,
+		open: true
+	}));
 });
 
 //Move bower_components to public
-gulp.task('bower_components', function(){
-	gulp.src(files.lib, { base: './' })
-		.pipe(gulp.dest(paths.public.dest));
+gulp.task('bower_components', 'Copies bower_components to public', function(){
+	gulp.src(files.libs, { base: './' })
+		.pipe(gulp.dest(files.publicDir));
 });
 
 //Move views to public folder
-gulp.task('views', function(){
+gulp.task('views', 'Copies views to public', function(){
 	return gulp.src(files.views)
 		.pipe(gulp.dest('public/views'));
 });
 
 //Move templates to public folder
-gulp.task('templates', function(){
+gulp.task('templates', 'Copies templates to public', function(){
 	return gulp.src(files.templates)
 		.pipe(gulp.dest('public/templates'));
 });
 
-//Move fonts to public folder
-gulp.task('fonts', function(){
-	return gulp.src(files.fonts)
-		.pipe(gulp.dest('public/fonts'));
-});
-
 //Build
-gulp.task('build', function(callback) {
+gulp.task('build', 'Builds projects for distribution', function(callback) {
 	sequence(
 		'clean',
-		['minify-js','sass'],
+		['minify-js','css'],
 		'build-html',
 		'bower_components',
 		'views',
 		'templates',
-		'fonts',
 		callback);
 });
 
 // Clean build folder
-gulp.task('clean', function () {
-	return gulp.src(paths.public.dest, {read: false})
+gulp.task('clean', 'Deletes existing public directory', function () {
+	return gulp.src(files.publicDir, {read: false})
 		.pipe(clean());
 });
 
 // Default
-gulp.task('default', ['build']);
+gulp.task('default', 'Builds project',['build']);
