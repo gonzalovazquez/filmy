@@ -50,6 +50,10 @@ exports.templates = [
 	'src/templates/*.html'
 ];
 
+exports.fonts = [
+	'src/fonts/**'
+];
+
 /****************************
 *******Test Directory******
 ****************************/

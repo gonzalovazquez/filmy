@@ -155,6 +155,12 @@ gulp.task('views', 'Copies views to public', function(){
 		.pipe(gulp.dest('public/views'));
 });
 
+//Fonts to public folder
+gulp.task('fonts', 'Copies fonts to public', function(){
+	return gulp.src(files.fonts)
+		.pipe(gulp.dest('public/fonts'));
+});
+
 //Move templates to public folder
 gulp.task('templates', 'Copies templates to public', function(){
 	return gulp.src(files.templates)
@@ -170,6 +176,7 @@ gulp.task('build', 'Builds projects for distribution', function(callback) {
 		'bower_components',
 		'views',
 		'templates',
+		'fonts',
 		callback);
 });
 
