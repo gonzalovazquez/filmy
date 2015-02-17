@@ -90,7 +90,7 @@ gulp.task('test', 'Runs unit tests', function() {
 });
 
 //End to end tests
-gulp.task('e2e','Runs end to end tests', ['build'], function(cb) {
+gulp.task('e2e', 'Runs end to end tests', ['build'], function(cb) {
 	stream = gulp.src('public')
 		.pipe(webserver({
 			livereload: false,
@@ -114,7 +114,7 @@ gulp.task('e2e','Runs end to end tests', ['build'], function(cb) {
 	});      
 });
 
-gulp.task('test-watch','Unit tests with watch', function() {
+gulp.task('test-watch', 'Unit tests with watch', function() {
 	return gulp.src(files.test.concat(files.templates))
 		.pipe(karma({
 			configFile: 'config/karma.conf.js',
