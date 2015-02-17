@@ -23,26 +23,25 @@ filmy.directive('plotFilms', ['filmyService', 'd3Service', function(filmyService
 						.append('g')
 						.classed('gnode', true)
 						.attr('transform', function(d, i) {
-							return 'translate(' + [ (i + 1) * 80] + ','+ [ (i + 1) * 80] +')'; 
+							console.log(d);
+							return 'translate(' + [d.imdbRating * 10] + ','+ [d.year / 8] +')'; 
 						});
 
 
 				node = gnode.append('circle')
 						.attr('class', 'node');
 
-				nodeAttr = node.attr('cx', function (d, i) { return (i + 1) * 20; })
+				nodeAttr = node.attr('cx', function (d, i) { return d.imdbRating * 10; })
 							.attr('cy', function (d, i) { return (i + 1) * 20; })
-							.attr('r', function (d) { return d.imdbRating; })
+							.attr('r', '10')
 							.style('fill', 'purple');
 
 				labels = gnode.append('text')
-						.attr('x', function (d, i) { return (i + 1.5) * 20; })
+						.attr('x', function (d, i) { d.imdbRating * 10; })
 						.attr('y', function (d, i) { return (i + 1.5) * 20; })
 						.attr('class', 'node-label')
 						.attr('fill', 'white')
 						.text(function(d) { return d.title; });
-
-
 				});
 			}, 500);
 		}
