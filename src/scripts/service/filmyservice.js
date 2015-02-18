@@ -13,7 +13,7 @@ filmy.service('filmyService', ['$http', function($http) {
 	function deleteExternal(method, id) {
 		return $http({
 			method: method,
-			url: hostName + id,
+			url: hostName + '/' +id,
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 		});
 	}
