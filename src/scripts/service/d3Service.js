@@ -15,7 +15,7 @@ filmy.factory('d3Service', ['$document', '$q', '$rootScope',
 			scriptTag.src = 'bower_components/d3/d3.min.js';
 			scriptTag.onreadystatechange = function () {
 				if (this.readyState == 'complete') onScriptLoad();
-			}
+			};
 			scriptTag.onload = onScriptLoad;
 
 			var s = $document[0].getElementsByTagName('body')[0];

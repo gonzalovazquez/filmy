@@ -8,7 +8,7 @@ filmy.directive('filmLibrary', ['filmyService', function(filmyService) {
 		link: function(scope) {
 			filmyService.getMovie(true).then(function(res) {
 					scope.films = res.data;
-			})
+			});
 
 			scope.deleteFilm = function(id) {
 				filmyService.deleteMovie(id).then(function(res){
